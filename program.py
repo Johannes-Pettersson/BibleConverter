@@ -9,7 +9,6 @@ firstBook = True
 firstChapter = True
 
 
-#behöver lägga in bokslutstagg efter varje bok
 
 with open('out.txt', 'w') as o:
 
@@ -24,7 +23,7 @@ with open('out.txt', 'w') as o:
             continue
         elif element == "%" and bookPrint == False:
             bookPrint = True
-            o.write('</b><b n="')
+            o.write('</v></c></b><b n="')
             continue
         elif element == "%" and bookPrint == True:
             bookPrint = False
@@ -37,7 +36,7 @@ with open('out.txt', 'w') as o:
             continue
         elif element == "'" and chapterPrint == False:
             chapterPrint = True
-            o.write('</c><c n="')
+            o.write('</v></c><c n="')
             continue
         elif element == "'" and chapterPrint == True:
             chapterPrint = False
