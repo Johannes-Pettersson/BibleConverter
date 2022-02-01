@@ -3,9 +3,11 @@ with open('in.txt', encoding='utf-8') as i:
 
 num1 = "0"
 num2 = "0"
-bokprint = False
+bookPrint = False
+chapterPrint = False
+firstChapter = True
 
-#bara kapitel kvar att lägga in
+#behöver lägga in bokslutstagg efter varje bok
 
 with open('out.txt', 'w') as o:
 
@@ -13,15 +15,31 @@ with open('out.txt', 'w') as o:
 
     for element in text:
 
-        if element == "%":
-            bokprint = True
-            o.write('<b n="')
+        if element == "%" and bookPrint == False:
+            bookPrint = True
+            o.write('</b><b n="')
             continue
-        elif element == "/":
-            bokprint = False
+        elif element == "%" and bookPrint == True:
+            bookPrint = False
             o.write('">')
             continue
-        if bokprint:
+        elif element == "'" and chapterPrint == False and firstChapter:
+            chapterPrint = True
+            firstChapter=False
+            o.write('<c n="')
+            continue
+        elif element == "'" and chapterPrint == False:
+            chapterPrint = True
+            o.write('</c><c n="')
+            continue
+        elif element == "'" and chapterPrint == True:
+            chapterPrint = False
+            o.write('">')
+            continue
+
+        if bookPrint:
+            o.write(element)
+        elif chapterPrint:
             o.write(element)
         else:
             #printing chapter
@@ -45,4 +63,4 @@ with open('out.txt', 'w') as o:
                     o.write('</v><v n="' + num1 + element + '">')
                     num1 = "0"
 
-    o.write('</b></v></bible>')
+    o.write('</v></c></b></bible>')
