@@ -1,12 +1,16 @@
 with open('in.txt', encoding='utf-8') as i:
     text = i.read()
 
-num1 = "0"
-num2 = "0"
+num1 = "?"
+num2 = "?"
+num3 = "?"
+num4 = "?"
+num5 = "?"
 bookPrint = False
 chapterPrint = False
 firstBook = True
 firstChapter = True
+verseNum = 0
 
 
 
@@ -19,10 +23,13 @@ with open('out.txt', 'w') as o:
         if element == "%" and bookPrint == False and firstBook:
             bookPrint = True
             firstBook=False
+            verseNum = 0
             o.write('<b n="')
             continue
         elif element == "%" and bookPrint == False:
             bookPrint = True
+            verseNum = 0
+            firstChapter = True
             o.write('</v></c></b><b n="')
             continue
         elif element == "%" and bookPrint == True:
@@ -32,10 +39,12 @@ with open('out.txt', 'w') as o:
         elif element == "'" and chapterPrint == False and firstChapter:
             chapterPrint = True
             firstChapter=False
+            verseNum = 0
             o.write('<c n="')
             continue
         elif element == "'" and chapterPrint == False:
             chapterPrint = True
+            verseNum = 0
             o.write('</v></c><c n="')
             continue
         elif element == "'" and chapterPrint == True:
@@ -48,25 +57,90 @@ with open('out.txt', 'w') as o:
         elif chapterPrint:
             o.write(element)
         else:
-            #printing chapter
+            #printing verse
             try:
                 int(element)
             except:
-                if num1 == "1":
-                    o.write('<v n="' + num1 + '">')
+                
+                if (num5 != "?"):
+                    o.write(num1 + num2 + num3 + num4 + num5)
                     o.write(element)
-                    num1 = "0"
-                elif num1 != "0":
-                    o.write('</v><v n="' + num1 + '">')
+                    num1 = "?"
+                    num2 = "?"
+                    num3 = "?"
+                    num4 = "?"
+                    num5 = "?"
+                elif (num4 != "?"):
+                    o.write(num1 + num2 + num3 + num4)
                     o.write(element)
-                    num1 = "0"
+                    num1 = "?"
+                    num2 = "?"
+                    num3 = "?"
+                    num4 = "?"
+                    num5 = "?"
+                elif (num3 != "?"):
+                    o.write(num1 + num2 + num3)
+                    o.write(element)
+                    num1 = "?"
+                    num2 = "?"
+                    num3 = "?"
+                    num4 = "?"
+                    num5 = "?"
+                elif (num2 != "?"):
+                    if(int(num1 + num2) == verseNum + 1):
+                        o.write('</v><v n="' + num1 + num2 + '">')
+                        o.write(element)
+                        verseNum = verseNum + 1
+                        num1 = "?"
+                        num2 = "?"
+                        num3 = "?"
+                        num4 = "?"
+                        num5 = "?"
+                    else:
+                        o.write(num1 + num2)
+                        o.write(element)
+                        num1 = "?"
+                        num2 = "?"
+                        num3 = "?"
+                        num4 = "?"
+                        num5 = "?"
+                elif(num1 != "?"):
+                    if(int(num1) == verseNum + 1):
+                        o.write('</v><v n="' + num1 + '">')
+                        o.write(element)
+                        verseNum = verseNum + 1
+                        num1 = "?"
+                        num2 = "?"
+                        num3 = "?"
+                        num4 = "?"
+                        num5 = "?"
+                    else:
+                        o.write(num1)
+                        o.write(element)
+                        num1 = "?"
+                        num2 = "?"
+                        num3 = "?"
+                        num4 = "?"
+                        num5 = "?"
                 else:
                     o.write(element)
-            else:
-                if num1 == "0":
-                    num1 = element
-                else:
-                    o.write('</v><v n="' + num1 + element + '">')
-                    num1 = "0"
 
+            else:
+                if num1 == "?":
+                    num1 = element
+                elif num1 != "?" and num2 == "?":
+                    num2 = element
+                elif num1 != "?" and num2 != "?" and num3 == "?":
+                    num3 = element
+                elif num1 != "?" and num2 != "?" and num3 != "?" and num4 == "?":
+                    num4 = element
+                elif num1 != "?" and num2 != "?" and num3 != "?" and num4 != "?" and num5 == "?":
+                    num5 = element
+                
     o.write('</v></c></b></bible>')
+
+num1 = "?"
+num2 = "?"
+num3 = "?"
+num4 = "?"
+num5 = "?"
