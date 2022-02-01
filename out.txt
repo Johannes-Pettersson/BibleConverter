@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?><bible></b><b n="1 Mosebok">
-</c><c n="1">
+<c n="1">
 <v n="1">I begynnelsen skapade Gud himmel och jord.
 </v><v n="2">Jorden var öde och tom, djupet täcktes av mörker och en gudsvind svepte fram över vattnet. </v><v n="3">Gud sade: »Ljus, bli till!« Och ljuset blev till. </v><v n="4">Gud såg att ljuset var gott, och han skilde ljuset från mörkret. </v><v n="5">Gud kallade ljuset dag, och mörkret kallade han natt. Det blev kväll och det blev morgon. Det var den första dagen.
 </v><v n="6">Gud sade: »I vattnet skall ett valv bli till, och det skall skilja vatten från vatten.« Och det blev så. </v><v n="7">Gud gjorde valvet och skilde vattnet under valvet från vattnet ovanför valvet. </v><v n="8">Gud kallade valvet himmel. Det blev kväll och det blev morgon. Det var den andra dagen.

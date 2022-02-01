@@ -5,7 +5,9 @@ num1 = "0"
 num2 = "0"
 bookPrint = False
 chapterPrint = False
+firstBook = True
 firstChapter = True
+
 
 #behöver lägga in bokslutstagg efter varje bok
 
@@ -15,7 +17,12 @@ with open('out.txt', 'w') as o:
 
     for element in text:
 
-        if element == "%" and bookPrint == False:
+        if element == "%" and bookPrint == False and firstBook:
+            bookPrint = True
+            firstBook=False
+            o.write('<b n="')
+            continue
+        elif element == "%" and bookPrint == False:
             bookPrint = True
             o.write('</b><b n="')
             continue
