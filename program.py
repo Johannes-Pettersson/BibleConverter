@@ -10,6 +10,7 @@ bookPrint = False
 chapterPrint = False
 firstBook = True
 firstChapter = True
+firstVerse = True
 verseNum = 0
 
 
@@ -39,11 +40,13 @@ with open('out.txt', 'w') as o:
         elif element == "'" and chapterPrint == False and firstChapter:
             chapterPrint = True
             firstChapter=False
+            firstVerse=True
             verseNum = 0
             o.write('<c n="')
             continue
         elif element == "'" and chapterPrint == False:
             chapterPrint = True
+            firstVerse=True
             verseNum = 0
             o.write('</v></c><c n="')
             continue
@@ -105,7 +108,17 @@ with open('out.txt', 'w') as o:
                         num4 = "?"
                         num5 = "?"
                 elif(num1 != "?"):
-                    if(int(num1) == verseNum + 1):
+                    if(int(num1) == verseNum + 1 and firstVerse):
+                        o.write('<v n="' + num1 + '">')
+                        o.write(element)
+                        verseNum = verseNum + 1
+                        firstVerse=False
+                        num1 = "?"
+                        num2 = "?"
+                        num3 = "?"
+                        num4 = "?"
+                        num5 = "?"
+                    elif(int(num1) == verseNum + 1):
                         o.write('</v><v n="' + num1 + '">')
                         o.write(element)
                         verseNum = verseNum + 1
